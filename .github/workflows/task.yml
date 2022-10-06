@@ -5,11 +5,16 @@ jobs:
   style_check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.10'
       - name: "Install python style checker"
         run: pip install black
       - name: "Check python style"
         run: black --check .
   test:
+    needs: style_check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,6 +23,3 @@ jobs:
           python-version: '3.8.10'
       - name: "Run unittest"
         run: python -m unittest
-  coverage_report:
-    runs-on: ubuntu-latest
-    steps:
