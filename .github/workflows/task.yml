@@ -1,0 +1,11 @@
+name: Auto workflow assignment for RSE102
+on: [push]
+
+jobs:
+  style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Check python style"
+        run: |
+        pip install black
+        black --check .
