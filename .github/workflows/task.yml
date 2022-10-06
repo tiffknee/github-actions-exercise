@@ -32,4 +32,12 @@ jobs:
       - name: "Install coverage package"
         run: pip install coverage
       - name: "Collect coverage info"
-        run: coverage report -m
+        run: coverage run -m pytest
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-coverage
+          path: .coverage
+          retention-days: 1
+
+  
