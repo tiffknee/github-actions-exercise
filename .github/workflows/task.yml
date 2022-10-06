@@ -39,5 +39,21 @@ jobs:
           name: my-coverage
           path: .coverage
           retention-days: 1
-
-  
+  coverage_report:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.10'
+      - name: "Download a single artifact"
+        uses: actions/download-artifact@v2
+        with:
+          name: my-coverage
+      - name: "Install coverage package"
+        run: pip install -U coverage
+      - name: "Generate coverage report"
+        run: coverage report -m
+      - name: "Generate fancy coverage report"
+        run: coverage html
