@@ -55,5 +55,11 @@ jobs:
         run: pip install -U coverage
       - name: "Generate coverage report"
         run: coverage report -m
-      - name: "Generate fancy coverage report"
-        run: coverage html
+      - name: "Save report in xml"
+        run: coverage xml
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-coverage-xml
+          path: coverage.xml
+          retention-days: 14
