@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8.10'
+      - name: "Install numpy package"
+        run: pip install numpy
       - name: "Install pytest package"
         run: pip install -U pytest
       - name: "Run test with pytest"
@@ -29,14 +31,4 @@ jobs:
         run: pip install coverage
       - name: "Collect coverage info"
         run: coverage report -m
-
-  coverage_report:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8.10'
-      - name: "Run coverage report"
-        run: python -m unittest
+  
